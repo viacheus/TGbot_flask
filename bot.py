@@ -25,7 +25,7 @@ async def echo(update, context):
 def main():
     # Создаём объект Application.
     # Вместо слова "TOKEN" надо разместить полученный от @BotFather токен
-    application = Application.builder().token(BOT_TOKEN).build()
+    application = Application.builder().token("7975101362:AAH3Ee4XXpZH2nz9jFN9X_etoEhGicEUywc").build()
 
     # Создаём обработчик сообщений типа filters.TEXT
     # из описанной выше асинхронной функции echo()
