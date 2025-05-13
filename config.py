@@ -1,1 +1,4 @@
-BOT_TOKEN = "7975101362:AAEh8bCPeNYSe4yTW9Vk7szqTM2jlqEyevU"
+import os
+
+BOT_TOKEN = os.environ["BOT_TOKEN"]
+OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]

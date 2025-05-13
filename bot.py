@@ -2,6 +2,7 @@
 import logging
 from telegram.ext import Application, MessageHandler, filters
 from config import BOT_TOKEN
+from openai_service import get_chatgpt_response
 
 # Запускаем логгирование
 logging.basicConfig(
@@ -10,16 +11,17 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-
 # Определяем функцию-обработчик сообщений.
 # У неё два параметра, updater, принявший сообщение и контекст - дополнительная информация о сообщении.
 async def echo(update, context):
-    # У объекта класса Updater есть поле message,
-    # являющееся объектом сообщения.
-    # У message есть поле text, содержащее текст полученного сообщения,
-    # а также метод reply_text(str),
-    # отсылающий ответ пользователю, от которого получено сообщение.
-    await update.message.reply_text(update.message.text)
+    # Получаем текст сообщения
+    user_message = update.message.text
+    
+    # Отправляем сообщение в ChatGPT
+    response = await get_chatgpt_response(user_message)
+    
+    # Отправляем ответ пользователю
+    await update.message.reply_text(response)
 
 
 def main():
