@@ -7,22 +7,20 @@ logger = logging.getLogger(__name__)
 # Инициализируем клиент OpenAI
 client = OpenAI(api_key=OPENAI_API_KEY)
 
-async def get_chatgpt_response(prompt):
+async def get_chatgpt_response(messages):
     """
-    Отправляет запрос к ChatGPT и возвращает ответ.
+    Отправляет историю сообщений к ChatGPT и возвращает ответ.
     
     Args:
-        prompt (str): Текст запроса пользователя
-        
+        messages (list): Список сообщений в формате OpenAI API
+        [{"role": "user"/"assistant", "content": str}, ...]
     Returns:
         str: Ответ от ChatGPT или сообщение об ошибке
     """
     try:
         response = client.chat.completions.create(
             model="gpt-4",
-            messages=[
-                {"role": "user", "content": prompt}
-            ]
+            messages=messages
         )
         return response.choices[0].message.content
     except Exception as e:
