@@ -1,0 +1,7 @@
+{% set designs = [
+    "🎨 *{message}* 🎨",
+    "✨ ~{message}~ ✨",
+    "🎯 _{message}_ 🎯"
+] %}
+{% set random_design = designs | random %}
+{{ random_design | replace('{message}', message) }} 
